@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.nutz</groupId>
 	<artifactId>lessc4j</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>2.7.2-SNAPSHOT</version>
 
 	<name>NutzCN的根项目</name>
 	<properties>
