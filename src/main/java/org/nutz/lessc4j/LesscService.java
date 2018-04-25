@@ -1,5 +1,6 @@
 package org.nutz.lessc4j;
 
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -46,7 +47,7 @@ public class LesscService {
     /**
      * 本方法必须先调用一次,而且很慢,起码2秒
      */
-    public void init() throws ScriptException {
+    public void init() throws Exception {
         // 相当于上下文
         Bindings bindings = scriptEngine.createBindings();
         // 放个map,用于提取返回值
@@ -88,10 +89,16 @@ public class LesscService {
      * @param path
      *            js脚本地址,肯定是/开头
      * @return js文本
+     * @throws FileNotFoundException 
      */
-    public String readJs(String path) {
+    public String readJs(String path) throws FileNotFoundException {
         path = "jslib" + path;
+        path = Disks.getCanonicalPath(path);
         InputStream ins = LesscService.class.getClassLoader().getResourceAsStream(path);
+        if (ins == null) {
+            log.debug("no such path=" + path);
+            throw new FileNotFoundException(path);
+        }
         String str = Lang.readAll(new InputStreamReader(ins));
         return str;
     }
