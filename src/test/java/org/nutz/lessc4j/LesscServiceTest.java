@@ -22,7 +22,7 @@ public class LesscServiceTest extends Assert {
     LesscService lessc;
     
     @Before
-    public void before() throws ScriptException {
+    public void before() throws Exception {
         lessc = new LesscService();
         lessc.init();
     }
